@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Link PH - Connecting Talent to Local Success</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: none !important;
+        }
+
+        .page.active {
+            display: block !important;
+        }
+
+        /* Landing Page */
+        #landing {
+            background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: fadeIn 1s;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #0ea5e9;
+            padding: 15px 50px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Login Page */
+        #login {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-container h2 {
+            color: #0ea5e9;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #0ea5e9;
+        }
+
+        .btn-login {
+            width: 100%;
+            background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(14, 165, 233, 0.3);
+        }
+
+        .back-btn {
+            background: #f0f0f0;
+            color: #666;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: #0ea5e9;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Get Started Page */
+        .header {
+            background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+        }
+
+        .logout-btn {
+            background: white;
+            color: #0ea5e9;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .welcome-msg {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .welcome-msg h2 {
+            color: #0ea5e9;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .option-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #0ea5e9;
+        }
+
+        .option-card .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .option-card h3 {
+            color: #10b981;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .option-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        .dashboard-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .dashboard-header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .dashboard-header h2 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(14, 165, 233, 0.3);
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .job-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .job-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .job-card h4 {
+            color: #0ea5e9;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .job-card .company {
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .job-info {
+            color: #666;
+            margin: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .apply-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .apply-btn:hover {
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #0ea5e9;
+            margin: 10px 0;
+        }
+
+        .stat-card .label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            .tagline {
+                font-size: 1.2rem;
+            }
+            .login-container {
+                padding: 30px;
+            }
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing" class="page active">
+        <div class="logo">SKILL LINK PH</div>
+        <div class="tagline">Connecting Talent to Local Success</div>
+        <button class="btn-primary" onclick="showPage('login')">Get Started</button>
+        <div style="position: absolute; bottom: 20px; font-size: 0.9rem; opacity: 0.8;">
+            Keeping Filipino talent in the Philippines 🇵🇭
+        </div>
+    </div>
+
+    <!-- Login/Signup Page -->
+    <div id="login" class="page">
+        <div class="login-container">
+            <button class="back-btn" onclick="showPage('landing')">← Back</button>
+            <h2 id="loginTitle">Welcome Back!</h2>
+            <div id="loginForm">
+                <div class="form-group" id="nameGroup" style="display: none;">
+                    <label>Full Name</label>
+                    <input type="text" id="name" placeholder="Juan dela Cruz">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="your.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Enter your password">
+                </div>
+                <button class="btn-login" onclick="handleLogin()">Log In</button>
+            </div>
+            <div class="signup-link">
+                <span id="switchText">Don't have an account?</span>
+                <a onclick="toggleSignup()">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Get Started Page -->
+    <div id="getstarted" class="page">
+        <div class="header">
+            <div>
+                <h1>SKILL LINK PH</h1>
+                <p style="font-size: 0.9rem; opacity: 0.9;">What brings you here today?</p>
+            </div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+        <div class="content">
+            <div class="welcome-msg">
+                <h2>Welcome to Skill Link PH!</h2>
+                <p style="font-size: 1.2rem; color: #666;">Choose your path to success</p>
+            </div>
+            <div class="options-grid">
+                <div class="option-card" onclick="showDashboard('jobseeker')">
+                    <div class="icon">🔍</div>
+                    <h3>I'm Looking for a Job</h3>
+                    <p>Find local opportunities and build your career in the Philippines</p>
+                </div>
+                <div class="option-card" onclick="showDashboard('employer')">
+                    <div class="icon">🏢</div>
+                    <h3>I'm an Employer</h3>
+                    <p>Post jobs and find talented Filipino professionals</p>
+                </div>
+                <div class="option-card" onclick="showDashboard('mentor')">
+                    <div class="icon">🎓</div>
+                    <h3>I'm a Mentor</h3>
+                    <p>Guide and support job seekers with your expertise</p>
+                </div>
+                <div class="option-card" onclick="showDashboard('learner')">
+                    <div class="icon">📚</div>
+                    <h3>I Want to Learn</h3>
+                    <p>Explore training and upskilling opportunities</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Seeker Dashboard -->
+    <div id="jobseeker" class="page dashboard">
+        <div class="header">
+            <h1>Job Seeker Dashboard</h1>
+            <div>
+                <button class="logout-btn" style="margin-right: 10px;" onclick="showPage('getstarted')">← Back</button>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+        <div class="dashboard-content">
+            <div class="dashboard-header">
+                <h2 id="welcomeMessage">Welcome back, User! 👋</h2>
+                <p style="color: #666; margin-top: 10px;">Your profile is 70% complete. Complete it to get better job matches!</p>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="browseJobs()">🔍 Browse Jobs</button>
+                    <button class="action-btn" onclick="uploadResume()">📤 Upload Resume</button>
+                    <button class="action-btn" onclick="updateProfile()">👤 Update Profile</button>
+                </div>
+            </div>
+            
+            <h3 style="color: #333; font-size: 1.8rem; margin-bottom: 20px;">Recommended Jobs for You</h3>
+            <div class="jobs-grid" id="jobsSection">
+                <div class="job-card">
+                    <h4>Software Developer</h4>
+                    <div class="company">Tech Corp PH</div>
+                    <div class="job-info">📍 Makati</div>
+                    <div class="job-info">💰 ₱50,000 - ₱80,000</div>
+                    <div class="job-info">⏰ Full-time</div>
+                    <button class="apply-btn" onclick="applyJob('Software Developer', 'Tech Corp PH')">Apply Now</button>
+                </div>
+                <div class="job-card">
+                    <h4>Registered Nurse</h4>
+                    <div class="company">Manila Medical Center</div>
+                    <div class="job-info">📍 Manila</div>
+                    <div class="job-info">💰 ₱35,000 - ₱45,000</div>
+                    <div class="job-info">⏰ Full-time</div>
+                    <button class="apply-btn" onclick="applyJob('Registered Nurse', 'Manila Medical Center')">Apply Now</button>
+                </div>
+                <div class="job-card">
+                    <h4>Graphic Designer</h4>
+                    <div class="company">Creative Studio</div>
+                    <div class="job-info">📍 BGC</div>
+                    <div class="job-info">💰 ₱30,000 - ₱50,000</div>
+                    <div class="job-info">⏰ Full-time</div>
+                    <button class="apply-btn" onclick="applyJob('Graphic Designer', 'Creative Studio')">Apply Now</button>
+                </div>
+                <div class="job-card">
+                    <h4>Marketing Manager</h4>
+                    <div class="company">Digital Marketing Co.</div>
+                    <div class="job-info">📍 Quezon City</div>
+                    <div class="job-info">💰 ₱45,000 - ₱65,000</div>
+                    <div class="job-info">⏰ Full-time</div>
+                    <button class="apply-btn" onclick="applyJob('Marketing Manager', 'Digital Marketing Co.')">Apply Now</button>
+                </div>
+                <div class="job-card">
+                    <h4>Data Analyst</h4>
+                    <div class="company">Analytics Pro PH</div>
+                    <div class="job-info">📍 Taguig</div>
+                    <div class="job-info">💰 ₱40,000 - ₱60,000</div>
+                    <div class="job-info">⏰ Full-time</div>
+                    <button class="apply-btn" onclick="applyJob('Data Analyst', 'Analytics Pro PH')">Apply Now</button>
+                </div>
+                <div class="job-card">
+                    <h4>HR Specialist</h4>
+                    <div class="company">People First Inc.</div>
+                    <div class="job-info">📍 Makati</div>
+                    <div class="job-info">💰 ₱35,000 - ₱50,000</div>
+                    <div class="job-info">⏰ Full-time</div>
+                    <button class="apply-btn" onclick="applyJob('HR Specialist', 'People First Inc.')">Apply Now</button>
+                </div>
+                <div class="job-card">
+                    <h4>Customer Service Representative</h4>
+                    <div class="company">Call Center Plus</div>
+                    <div class="job-info">📍 Pasig</div>
+                    <div class="job-info">💰 ₱25,000 - ₱35,000</div>
+                    <div class="job-info">⏰ Full-time</div>
+                    <button class="apply-btn" onclick="applyJob('Customer Service Representative', 'Call Center Plus')">Apply Now</button>
+                </div>
+                <div class="job-card">
+                    <h4>Accountant</h4>
+                    <div class="company">Finance Solutions PH</div>
+                    <div class="job-info">📍 Mandaluyong</div>
+                    <div class="job-info">💰 ₱35,000 - ₱55,000</div>
+                    <div class="job-info">⏰ Full-time</div>
+                    <button class="apply-btn" onclick="applyJob('Accountant', 'Finance Solutions PH')">Apply Now</button>
+                </div>
+                <div class="job-card">
+                    <h4>Teacher</h4>
+                    <div class="company">Bright Future Academy</div>
+                    <div class="job-info">📍 Manila</div>
+                    <div class="job-info">💰 ₱30,000 - ₱45,000</div>
+                    <div class="job-info">⏰ Full-time</div>
+                    <button class="apply-btn" onclick="applyJob('Teacher', 'Bright Future Academy')">Apply Now</button>
+                </div>
+                <div class="job-card">
+                    <h4>Sales Executive</h4>
+                    <div class="company">Sales Pro Corporation</div>
+                    <div class="job-info">📍 BGC</div>
+                    <div class="job-info">💰 ₱30,000 - ₱50,000 + Commission</div>
+                    <div class="job-info">⏰ Full-time</div>
+                    <button class="apply-btn" onclick="applyJob('Sales Executive', 'Sales Pro Corporation')">Apply Now</button>
+                </div>
+                <div class="job-card">
+                    <h4>Web Developer</h4>
+                    <div class="company">WebTech Studios</div>
+                    <div class="job-info">📍 Quezon City</div>
+                    <div class="job-info">💰 ₱45,000 - ₱70,000</div>
+                    <div class="job-info">⏰ Full-time</div>
+                    <button class="apply-btn" onclick="applyJob('Web Developer', 'WebTech Studios')">Apply Now</button>
+                </div>
+                <div class="job-card">
+                    <h4>Physical Therapist</h4>
+                    <div class="company">Health Plus Clinic</div>
+                    <div class="job-info">📍 Makati</div>
+                    <div class="job-info">💰 ₱40,000 - ₱60,000</div>
+                    <div class="job-info">⏰ Full-time</div>
+                    <button class="apply-btn" onclick="applyJob('Physical Therapist', 'Health Plus Clinic')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Employer Dashboard -->
+    <div id="employer" class="page dashboard">
+        <div class="header">
+            <h1>Employer Dashboard</h1>
+            <div>
+                <button class="logout-btn" style="margin-right: 10px;" onclick="showPage('getstarted')">← Back</button>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+        <div class="dashboard-content">
+            <div class="dashboard-header">
+                <h2>Welcome, Employer! 🏢</h2>
+                <button class="action-btn" style="width: auto; padding: 15px 40px; margin-top: 20px;">+ Post New Job</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div style="font-size: 2rem;">📝</div>
+                    <div class="number">12</div>
+                    <div class="label">Active Job Posts</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 2rem;">👥</div>
+                    <div class="number">247</div>
+                    <div class="label">Total Applications</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 2rem;">📈</div>
+                    <div class="number">1,893</div>
+                    <div class="label">Profile Views</div>
+                </div>
+            </div>
+
+            <h3 style="color: #333; font-size: 1.8rem; margin: 30px 0 20px;">Your Active Job Posts</h3>
+            <div style="background: white; border-radius: 15px; padding: 20px;">
+                <div style="padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h4 style="color: #333; margin-bottom: 5px;">Software Developer</h4>
+                        <p style="color: #666; font-size: 0.9rem;">Posted 3 days ago • 20 applicants</p>
+                    </div>
+                    <button class="action-btn" style="width: auto; padding: 10px 25px;">View Applicants</button>
+                </div>
+                <div style="padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h4 style="color: #333; margin-bottom: 5px;">Marketing Manager</h4>
+                        <p style="color: #666; font-size: 0.9rem;">Posted 5 days ago • 25 applicants</p>
+                    </div>
+                    <button class="action-btn" style="width: auto; padding: 10px 25px;">View Applicants</button>
+                </div>
+                <div style="padding: 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h4 style="color: #333; margin-bottom: 5px;">HR Specialist</h4>
+                        <p style="color: #666; font-size: 0.9rem;">Posted 1 week ago • 30 applicants</p>
+                    </div>
+                    <button class="action-btn" style="width: auto; padding: 10px 25px;">View Applicants</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mentor Dashboard -->
+    <div id="mentor" class="page dashboard">
+        <div class="header">
+            <h1>Mentor Dashboard</h1>
+            <div>
+                <button class="logout-btn" style="margin-right: 10px;" onclick="showPage('getstarted')">← Back</button>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+        <div class="dashboard-content">
+            <div class="dashboard-header">
+                <h2>Welcome, Mentor! 🎓</h2>
+                <p style="color: #666; margin-top: 10px;">Share your expertise and guide the next generation of Filipino professionals</p>
+            </div>
+
+            <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <div class="stat-card">
+                    <div style="font-size: 2rem;">👥</div>
+                    <div class="number">8</div>
+                    <div class="label">Active Mentees</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 2rem;">📅</div>
+                    <div class="number">5</div>
+                    <div class="label">Upcoming Sessions</div>
+                </div>
+            </div>
+
+            <h3 style="color: #333; font-size: 1.8rem; margin: 30px 0 20px;">Your Mentees</h3>
+            <div style="background: white; border-radius: 15px; padding: 20px;">
+                <div style="padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h4 style="color: #333; margin-bottom: 5px;">Maria Santos - Software Developer</h4>
+                        <p style="color: #666; font-size: 0.9rem;">Next session: Tomorrow, 2:00 PM</p>
+                    </div>
+                    <button class="action-btn" style="width: auto; padding: 10px 25px;">Message</button>
+                </div>
+                <div style="padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h4 style="color: #333; margin-bottom: 5px;">Pedro Reyes - Graphic Designer</h4>
+                        <p style="color: #666; font-size: 0.9rem;">Next session: Dec 15, 3:00 PM</p>
+                    </div>
+                    <button class="action-btn" style="width: auto; padding: 10px 25px;">Message</button>
+                </div>
+                <div style="padding: 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h4 style="color: #333; margin-bottom: 5px;">Anna Cruz - Marketing</h4>
+                        <p style="color: #666; font-size: 0.9rem;">Next session: Dec 20, 1:00 PM</p>
+                    </div>
+                    <button class="action-btn" style="width: auto; padding: 10px 25px;">Message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learner Dashboard -->
+    <div id="learner" class="page dashboard">
+        <div class="header">
+            <h1>Training Hub</h1>
+            <div>
+                <button class="logout-btn" style="margin-right: 10px;" onclick="showPage('getstarted')">← Back</button>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+        <div class="dashboard-content">
+            <div class="dashboard-header">
+                <h2>Explore Training & Upskilling 📚</h2>
+                <p style="color: #666; margin-top: 10px;">Enhance your skills and boost your career prospects</p>
+            </div>
+
+            <h3 style="color: #333; font-size: 1.8rem; margin: 30px 0 20px;">Popular Courses</h3>
+            <div class="jobs-grid">
+                <div class="job-card">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">💻</div>
+                    <h4>Web Development Bootcamp</h4>
+                    <div class="job-info">📊 Beginner</div>
+                    <div class="job-info">⏱️ 12 weeks</div>
+                    <button class="apply-btn">Enroll Now</button>
+                </div>
+                <div class="job-card">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">📱</div>
+                    <h4>Digital Marketing Masterclass</h4>
+                    <div class="job-info">📊 Intermediate</div>
+                    <div class="job-info">⏱️ 8 weeks</div>
+                    <button class="apply-btn">Enroll Now</button>
+                </div>
+                <div class="job-card">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">📊</div>
+                    <h4>Data Analytics with Python</h4>
+                    <div class="job-info">📊 Advanced</div>
+                    <div class="job-info">⏱️ 10 weeks</div>
+                    <button class="apply-btn">Enroll Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isSignup = false;
+        let userName = 'User';
+
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function toggleSignup() {
+            isSignup = !isSignup;
+            const nameGroup = document.getElementById('nameGroup');
+            const loginTitle = document.getElementById('loginTitle');
+            const switchText = document.getElementById('switchText');
+            const loginBtn = document.querySelector('.btn-login');
+            
+            if (isSignup) {
+                nameGroup.style.display = 'block';
+                loginTitle.textContent = 'Join Skill Link PH';
+                switchText.textContent = 'Already have an account?';
+                loginBtn.textContent = 'Sign Up';
+            } else {
+                nameGroup.style.display = 'none';
+                loginTitle.textContent = 'Welcome Back!';
+                switchText.textContent = "Don't have an account?";
+                loginBtn.textContent = 'Log In';
+            }
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const name = document.getElementById('name').value;
+            
+            if (isSignup && !name) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (email && password) {
+                if (name) {
+                    userName = name.split(' ')[0];
+                } else {
+                    userName = email.split('@')[0];
+                }
+                showPage('getstarted');
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+
+        function showDashboard(type) {
+            if (type === 'jobseeker') {
+                const welcomeMsg = document.getElementById('welcomeMessage');
+                if (welcomeMsg) {
+                    welcomeMsg.textContent = `Welcome back, ${userName}! 👋`;
+                }
+            }
+            showPage(type);
+        }
+
+        function browseJobs() {
+            const jobsSection = document.getElementById('jobsSection');
+            if (jobsSection) {
+                jobsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Add a highlight effect
+                jobsSection.style.transition = 'all 0.3s';
+                jobsSection.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    jobsSection.style.transform = 'scale(1)';
+                }, 300);
+            }
+        }
+
+        function uploadResume() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.pdf,.doc,.docx';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    alert(`✅ Resume "${file.name}" uploaded successfully!\n\nYour profile has been updated.`);
+                }
+            };
+            input.click();
+        }
+
+        function updateProfile() {
+            const name = prompt('Enter your full name:', userName);
+            const email = prompt('Enter your email:', document.getElementById('email').value);
+            const phone = prompt('Enter your phone number:', '+63');
+            const location = prompt('Enter your location:', 'Metro Manila');
+            
+            if (name && email && phone && location) {
+                userName = name.split(' ')[0];
+                document.getElementById('welcomeMessage').textContent = `Welcome back, ${userName}! 👋`;
+                alert('✅ Profile updated successfully!');
+            }
+        }
+
+        function applyJob(jobTitle, company) {
+            alert(`✅ Application submitted for ${jobTitle} at ${company}!\n\nYou will receive a confirmation email shortly.`);
+        }
+
+        function logout() {
+            showPage('landing');
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('name').value = '';
+            userName = 'User';
+        }
+    </script>
+</body>
+</html>
